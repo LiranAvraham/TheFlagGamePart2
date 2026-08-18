@@ -14,15 +14,19 @@ def create_images():
     cell_width = LENGTH_WINDOW // BOARD_NUM_COLS
     cell_height = HEIGHT_WINDOW // BOARD_NUM_ROWS
 
-    soldier_image = pygame.transform.scale(SOLDIER_IMAGE, (cell_width * 2, cell_height * 4))
+    soldier_image = pygame.transform.scale(SOLDIER_IMAGE, (cell_width * 4, cell_height * 4))
     flag_image = pygame.transform.scale(FLAG_IMAGE, (cell_width * 4, cell_height * 3))
     mine_image = pygame.transform.scale(MINE_IMAGE, (cell_width * 3, cell_height))
-    grass_image = pygame.transform.scale(GRASS_IMAGE, (LENGTH_GRASS, HEIGHT_GRASS))
+    grass_image = pygame.transform.scale(GRASS_IMAGE, (cell_width * 3, cell_height*3))
 
     return soldier_image, flag_image, mine_image, grass_image
 
 
 def draw_game(screen, matrix, grass_matrix, soldier_row, soldier_col, flag_row, flag_col, show_mines, soldier_image, flag_image, mine_image, grass_image, cell_width, cell_height):
+    font = pygame.font.SysFont(None, 20)
+    text_welcome = font.render(WELCOME_SCREEN, True, WHITE)
+    pygame.display.flip()
+
     if show_mines:
         screen.fill(BACKGROUND_COLOR_FOR_NIGHT_MODE)
     else:
@@ -47,5 +51,6 @@ def draw_game(screen, matrix, grass_matrix, soldier_row, soldier_col, flag_row, 
 
     screen.blit(soldier_image, (soldier_col * cell_width, soldier_row * cell_height))
     screen.blit(flag_image, (flag_col * cell_width, flag_row * cell_height))
+    screen.blit(text_welcome, (100, 0))
 
     pygame.display.flip()

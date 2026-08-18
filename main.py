@@ -5,7 +5,8 @@ from consts import *
 from game_field import *
 from soldier import *
 from screen import *
-# import database
+import database
+
 
 
 pygame.init()
@@ -52,7 +53,7 @@ press_end_time = 0
 # start running the game loop
 running = True
 
-
+database.creat_csv()
 pressed_number = 0
 # number_press_start_time = 0
 
@@ -68,7 +69,7 @@ while running:
                 show_mines = True
                 show_mines_start_time = pygame.time.get_ticks()
 
-                soldier_image = pygame.transform.scale(SOLDIER_IMAGE_NIGHT, (cell_width * 2, cell_height * 4))
+                soldier_image = pygame.transform.scale(SOLDIER_IMAGE_NIGHT, (cell_width * 4, cell_height * 4))
 
             if event.key in NUMBER_KEYS:
                 pressed_number = NUMBER_KEYS[event.key]
@@ -83,25 +84,15 @@ while running:
                 press_end_time = pygame.time.get_ticks()
 
                 press_duration = press_end_time - number_press_start_time
-
-
                 if press_duration <= 1000:
-                    # save_game(pressed_number, soldier_row, soldier_col, matrix, grass_matrix)
-
-                    print(pressed_number)
-
-                # else:
-                #     # load game from database
-                #     loading_game = load_game(pressed_number)
-
-
+                    database.save_new_data(pressed_number,matrix, grass_matrix,(soldier_row, soldier_col))
 
     if show_mines:
         current_time = pygame.time.get_ticks()
 
         if current_time - show_mines_start_time >= 1000:
             show_mines = False
-            soldier_image = pygame.transform.scale(SOLDIER_IMAGE, (cell_width * 2, cell_height * 4))
+            soldier_image = pygame.transform.scale(SOLDIER_IMAGE, (cell_width * 4, cell_height * 4))
 
     soldier_location = check_soldier_location(matrix, soldier_row, soldier_col)
 

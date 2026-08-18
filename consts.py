@@ -1,33 +1,36 @@
 import pygame
-
-LENGTH_WINDOW = 1200
-HEIGHT_WINDOW = 800
-
-BACKGROUND_COLOR_FOR_NIGHT_MODE = (0, 0, 0, 255)
-
-BACKGROUND_COLOR = (0,255, 0)
+CELL_SIZE = 20
 BOARD_NUM_ROWS = 25
 BOARD_NUM_COLS = 50
+LENGTH_WINDOW = CELL_SIZE* BOARD_NUM_COLS
+HEIGHT_WINDOW = CELL_SIZE* BOARD_NUM_ROWS
+BACKGROUND_COLOR_FOR_NIGHT_MODE = (0, 0, 0, 255)
+BACKGROUND_COLOR = (0, 100, 0, 255)
+
+LEN_MATRIX = 1250
 
 NUM_OF_GRASS = 20
 GRASS_IMAGE = pygame.image.load("grass.png")
-LENGTH_GRASS = 50
-HEIGHT_GRASS = 50
+LENGTH_GRASS = 100
+HEIGHT_GRASS = 100
+GRASS_NUM_ROWS = 1
+GRASS_NUM_COLS = 3
 
 SOLDIER_NUM_ROWS = 4
 SOLDIER_NUM_COLS = 2
 LENGTH_SOLDIER = 100
 HEIGHT_SOLIDER = 100
 SOLDIER_FIRST_LOC = (0,0)
+soldier_row = 0
+soldier_col = 0
 SOLDIER_IMAGE = pygame.image.load("soldier.png")
 SOLDIER_IMAGE_NIGHT = pygame.image.load("soldier_nigth.png")
-
-
 FLAG_IMAGE = pygame.image.load("flag.png")
 FLAG_NUM_ROWS = 3
 FLAG_NUM_COLS = 4
 LENGTH_FLAG = 100
 HEIGHT_FLAG = 100
+FLAG_INDEX = [(22,46),(22,47),(22,48),(22,49),(23,46),(23,47),(23,48),(23,49),(24,46), (24,47), (24,48),(24,49)]
 X_FLAG = LENGTH_WINDOW - LENGTH_FLAG
 Y_FLAG = HEIGHT_WINDOW - HEIGHT_FLAG
 
@@ -44,4 +47,20 @@ EMPTY_PLACE = "EMPTY"
 MINE = "MINE"
 FLAG = "FLAG"
 GRASS = "GRASS"
-# GREEN = ()
+
+NUMBER_KEYS = {
+    pygame.K_1: 1,
+    pygame.K_2: 2,
+    pygame.K_3: 3,
+    pygame.K_4: 4,
+    pygame.K_5: 5,
+    pygame.K_6: 6,
+    pygame.K_7: 7,
+    pygame.K_8: 8,
+    pygame.K_9: 9
+}
+
+WELCOME_SCREEN = "Welcome to The Flag Game \n have fun!"
+WHITE = (255, 255, 255)
+cell_width = LENGTH_WINDOW // BOARD_NUM_COLS
+cell_height = HEIGHT_WINDOW // BOARD_NUM_ROWS
