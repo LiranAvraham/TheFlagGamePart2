@@ -5,6 +5,7 @@ from consts import *
 from game_field import *
 from soldier import *
 from screen import *
+# import database
 
 
 pygame.init()
@@ -44,11 +45,15 @@ show_mines = False
 # time the mines appear
 show_mines_start_time = 0
 
+number_press_start_time = 0
+press_end_time = 0
+
+
 # start running the game loop
 running = True
 
 
-
+pressed_number = 0
 # number_press_start_time = 0
 
 while running:
@@ -65,17 +70,31 @@ while running:
 
                 soldier_image = pygame.transform.scale(SOLDIER_IMAGE_NIGHT, (cell_width * 2, cell_height * 4))
 
+            if event.key in NUMBER_KEYS:
+                pressed_number = NUMBER_KEYS[event.key]
+                number_press_start_time = pygame.time.get_ticks()
+
             soldier_row, soldier_col = move_soldier(event, soldier_row, soldier_col, show_mines)
 
-        #     if event.key in NUMBER_KEYS:
-        #         pressed_number = NUMBER_KEYS[event.key]
-        #         number_press_start_time = pygame.time.get_ticks()
-        #
-        # if event.key in NUMBER_KEYS:
-        #     press_end_time = pygame.time.get_ticks()
-        #
-        #     press_duration = press_end_time - number_press_start_time
-        #     print(press_duration)
+
+        if event.type == pygame.KEYUP:
+
+            if event.key in NUMBER_KEYS:
+                press_end_time = pygame.time.get_ticks()
+
+                press_duration = press_end_time - number_press_start_time
+
+
+                if press_duration <= 1000:
+                    # save_game(pressed_number, soldier_row, soldier_col, matrix, grass_matrix)
+
+                    print(pressed_number)
+
+                # else:
+                #     # load game from database
+                #     loading_game = load_game(pressed_number)
+
+
 
     if show_mines:
         current_time = pygame.time.get_ticks()
